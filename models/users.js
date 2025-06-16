@@ -20,6 +20,12 @@ const userSchema = mongoose.Schema({
   bio: {
     type: String,
   },
+  followers: [
+    {
+      type: String,
+      ref: "users",
+    },
+  ]
 });
 
 // Hash password before saving
