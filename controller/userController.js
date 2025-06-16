@@ -65,9 +65,34 @@ const loginUser = async (req, res) => {
     res.status(500).json({ msg: "Server error" });
   }
 };
+
+const followUser = async (req, res) => {
+  const username = req.params.name;
+  const followerName = req.body.userName;
+  try {
+    if (!username || !followerName) {
+      res.json(404).json({ message: "enter correct userName" });
+    }
+    const user = await User.findOneAndUpdate(
+      {userName:username},
+      {$addToSet: {
+         followers: followerName 
+        }},   
+      { new: true}
+    );
+
+    return res.json({
+      user
+    });
+
+  } catch (error) {
+    res.status(500).json({ message: "Server error while following user" });
+  }
+};
 module.exports = {
   registerUser,
   getAllUsers,
   specificUser,
   loginUser,
+  followUser,
 };

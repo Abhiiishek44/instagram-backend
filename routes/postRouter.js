@@ -6,9 +6,9 @@ const router = express.Router();
 
 
 router.post("/create",authenticateToken,createPost)
-router.get("/allPost",allPost)
-router.get("/postbyId/:userId",postById)
-router.post("/incrementCount/:id",incrementLike)
-router.post("/Comments",makeComment)
+router.get("/allPost",authenticateToken,allPost)
+router.get("/postbyId/:userId",authenticateToken,postById)
+router.post("/incrementCount/:id",authenticateToken,incrementLike)
+router.post("/Comments",authenticateToken,makeComment)
 
 module.exports = router;
